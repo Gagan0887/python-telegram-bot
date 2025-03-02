@@ -1,0 +1,29 @@
+
+1. Game Concept (E
+
+We'll implement a coin flip game:
+random: For generating the coin flip result.
+
+import logging
+import random
+from telegram import Update, ReplyKeyboardMarkup, ReplyKeyboardRemove
+from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes, ConversationHandler
+
+# Enable logging
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
+)
+logger = logging.getLogger(__name__)
+
+# Bot Token (Replace with your actual token)
+BOT_TOKEN = "YOUR_TELEGRAM_BOT_TOKEN"
+
+# States for the Conversation Handler
+CHOOSING, BETTING, RESULT = range(3)
+
+# Coin Flip Options
+coin_options = [['Heads', 'Tails']]
+reply_markup = ReplyKeyboardMarkup(coin_options, one_time_keyboard=True)
+
+#In memory user data store
+user_data = {}
